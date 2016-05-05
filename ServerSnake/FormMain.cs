@@ -179,7 +179,7 @@ namespace ServerSnake
             var user = Program.FormMain.Users.Find(C => C.ConnectionID == Context.ConnectionId);
             
             Program.FormMain.CountPlayer++;
-            if (Program.FormMain.CountPlayer == 0)
+            if (Program.FormMain.CountPlayer == 3)
             {
                 Clients.All.NewMessage("До начала игры 3");
                 Thread.Sleep(1000);
