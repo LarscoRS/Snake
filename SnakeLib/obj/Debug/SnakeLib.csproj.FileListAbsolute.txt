@@ -1,0 +1,10 @@
+C:\Users\roman_000\Desktop\RVS\Solution\Snake\SnakeLib\bin\Debug\SnakeLib.dll
+C:\Users\roman_000\Desktop\RVS\Solution\Snake\SnakeLib\bin\Debug\SnakeLib.pdb
+C:\Users\roman_000\Desktop\RVS\Solution\Snake\SnakeLib\obj\Debug\SnakeLib.csprojResolveAssemblyReference.cache
+C:\Users\roman_000\Desktop\RVS\Solution\Snake\SnakeLib\obj\Debug\SnakeLib.dll
+C:\Users\roman_000\Desktop\RVS\Solution\Snake\SnakeLib\obj\Debug\SnakeLib.pdb
+C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\obj\Debug\SnakeLib.csprojResolveAssemblyReference.cache
+C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\obj\Debug\SnakeLib.dll
+C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\obj\Debug\SnakeLib.pdb
+C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\bin\Debug\SnakeLib.dll
+C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\bin\Debug\SnakeLib.pdb
