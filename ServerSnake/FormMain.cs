@@ -116,10 +116,7 @@ namespace ServerSnake
             app.MapSignalR();
         }
     }
-    //public static class Flag
-    //{
-    //    public static bool flag;
-    //}
+  
     public class SnakeHub : Hub
     {
 
