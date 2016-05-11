@@ -17,7 +17,7 @@ namespace ServerSnake
         Dispath dispath;      
         private IDisposable SignalR { set; get; }
         public List<User> Users;
-        public int CountPlayer=-1;
+        public int CountPlayer=0;
         Map map;
 
         public int CountPlayerSetting;
@@ -85,7 +85,7 @@ namespace ServerSnake
                 MessageBox.Show("Server start fail");
                 return;
             }
-           
+            CountPlayer += CountBots;
         }
 
         //вывод логов
@@ -211,11 +211,11 @@ namespace ServerSnake
         public void SearchGame()
         {
             var user = Program.FormMain.Users.Find(C => C.ConnectionID == Context.ConnectionId);
-            
             Program.FormMain.CountPlayer++;
-           
-            if (Program.FormMain.CountPlayer == Program.FormMain.CountPlayerSetting-1)
+
+            if (Program.FormMain.CountPlayer == Program.FormMain.CountPlayerSetting)
             {
+                
                 Clients.All.NewMessage("До начала игры 3");
                 Thread.Sleep(1000);
                 Clients.All.NewMessage("До начала игры 2");
