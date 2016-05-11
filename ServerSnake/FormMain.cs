@@ -58,6 +58,7 @@ namespace ServerSnake
                 buttonStart.Enabled = false;
                 Task.Run(() => StartServer());
             }
+            CountPlayer += CountBots;
         }
 
 
@@ -213,7 +214,7 @@ namespace ServerSnake
             
             Program.FormMain.CountPlayer++;
            
-            if (Program.FormMain.CountPlayer <= Program.FormMain.CountPlayerSetting-1)
+            if (Program.FormMain.CountPlayer == Program.FormMain.CountPlayerSetting-1)
             {
                 Clients.All.NewMessage("До начала игры 3");
                 Thread.Sleep(1000);
