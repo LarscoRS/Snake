@@ -6,14 +6,17 @@ using System.Threading.Tasks;
 using System.Drawing;
 namespace SnakeLib
 {
-    public class Food:Block
+    public class Food
     {
+        public Coordinate Coordinate { set; get; }
+        public Color Color { set; get; }
         public Food(Coordinate coord, Color color)
         {
-            this.Coordinate = coord;
+            Coordinate = coord;
             Color = color;
         }
 
+        public Food() { }
         
     }
 }

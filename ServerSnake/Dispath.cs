@@ -11,6 +11,7 @@ namespace ServerSnake
     public class Dispath
     {
         #region Constructors
+
         static readonly Dispath myInstance = new Dispath();
         static Dispath() { }
         Dispath() { }
@@ -26,8 +27,8 @@ namespace ServerSnake
    
 
         public Map map;
-        public int time=0;
-
+        public long time = 0;
+        public long Time;
         Timer Motor = new Timer();
         public delegate void MapTickDelegate();
         public event MapTickDelegate MotorTick;
@@ -35,19 +36,19 @@ namespace ServerSnake
         public void StartGame()
         {
             map  = new Map(51, 51);
-       
-            if (Motor.Enabled==false)
+            
+            if (Motor.Enabled == false)
             {
                 Motor.Enabled = true;
                 Motor.Interval = 200;
                 Motor.Elapsed += Motor_Elapsed;
-                Motor.Start();
-                
+                Motor.Start();                
             }          
         }             
 
         private void Motor_Elapsed(object sender, ElapsedEventArgs e)
         {
+            
             if (MotorTick != null)
             {
                 Motor.Enabled = false;
@@ -56,7 +57,7 @@ namespace ServerSnake
                 Motor.Enabled = true;
                 time++;
             }
-            if (time == 600)
+            if (time == 1500)
             {
                 Motor.Stop();
                 map.Snakes.RemoveRange(0, map.Snakes.Count);                
@@ -65,7 +66,14 @@ namespace ServerSnake
 
         public void pressWay(int userIndex, int Way)
         {
-            map.Snakes[userIndex].Way = Way;
+            if (time < 1500)
+            {
+                try
+                {
+                    map.Snakes[userIndex].Way = Way;
+                }
+                catch { }
+            }
         }     
     }
 }

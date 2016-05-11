@@ -1,5 +1,4 @@
 ﻿using System;
-
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,37 +6,38 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using Microsoft.AspNet.SignalR.Client;
-
 using System.Net;
 using System.Net.Http;
 using System.Windows.Forms;
 using SnakeLib;
+using System.Threading;
+
 namespace ClientSnake
 {
     public partial class FormMain : Form
     {
         int W = 51, H = 51, S = 10;
-        int X = 0, Y = 0;
+      
         int way = 0; // направление движения змеи: 0 - вверх, 1 - вправо, 2 - вниз, 3 - влево
-       
+        public long Time;
         Map map;
         List<Snake> snakes;
         Food Food;
 
+        User User { set; get; }
 
         public FormMain()
         {
             InitializeComponent();
             map = new Map(W,H);
       
-            this.pictureBox1.Paint += new PaintEventHandler(Program_Paint);
+            this.pictureBoxMap.Paint += new PaintEventHandler(Program_Paint);
    
-            this.pictureBox1.Focus();
-            this.pictureBox1.PreviewKeyDown += PictureBox1_PreviewKeyDown;
+            this.pictureBoxMap.Focus();
+            this.pictureBoxMap.PreviewKeyDown += PictureBox1_PreviewKeyDown;
 
-           
+            this.richTextBox1.Visible = false;
         }
 
         private void PictureBox1_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -71,6 +71,21 @@ namespace ClientSnake
             
             }
     }
+
+        private void ConsoleWrite()
+        {
+            richTextBox1.Clear();
+            string s=string.Empty;
+            for(var i=0; i<map.Matrix.GetLength(0); i++)
+            {
+                for(int j=0; j<map.Matrix.GetLength(1); j++)
+                {
+                    s += map.Matrix[i, j];
+                }
+                s += Environment.NewLine;
+            }
+            richTextBox1.AppendText(s);
+        }
 
         void Program_KeyDown(object sender, KeyEventArgs e)
         {
@@ -137,27 +152,26 @@ namespace ClientSnake
             }
             );
 
-            HubProxy.On<List<Snake>, Food>("GameTick", (r, food) =>
+            HubProxy.On<List<Snake>, Food, Byte[,],long>("GameTick", (r, food, matrix, time) =>
             {
+                Time = time;
                 snakes = r;
                 Food = food;
-                this.pictureBox1.Invalidate();
-               
+                map.Matrix = matrix;
+                map.Snakes = r;
+                map.Food = food;
+                this.pictureBoxMap.Invalidate();                
+                Action act = () => ConsoleWrite();
+                richTextBox1.Invoke(act);           
             }
+            
             );
 
-            HubProxy.On<int, int>("AppleTick", (x, y) =>
+            HubProxy.On<User>("UserSettings", (user) =>
             {
-                Action act = () =>
-                {
-                    X = x;
-                    Y = y;
-                    richTextBoxChat.AppendText("apple1:" + x.ToString() + " " + y.ToString() + Environment.NewLine);
-                    this.pictureBox1.Invalidate();
-                };
-                richTextBoxChat.Invoke(act);
-            }
-            );
+                User = user;
+
+            });
 
             HubProxy.On("Off", () =>
             {
@@ -202,14 +216,18 @@ namespace ClientSnake
         {
             HubProxy.Invoke("SearchGame");
             buttonSearchGame.Enabled = false;
+            textBoxTime.Enabled = false;
         }
 
         private void buttonConnect_Click(object sender, EventArgs e)
         {
             ConnectAsync();
             buttonConnect.Enabled = false;
+            textBoxName.Enabled = false;
             buttonSend.Enabled = true;
             buttonSearchGame.Enabled = true;
+            Thread.Sleep(3000);
+
         }
 
         private void buttonSend_Click(object sender, EventArgs e)

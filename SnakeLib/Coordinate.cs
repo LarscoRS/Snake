@@ -8,8 +8,8 @@ namespace SnakeLib
 {
     public class Coordinate
     {
-        public int X;
-        public int Y;
+        public int X { set; get; }
+        public int Y { set; get; }
         public Coordinate(int x, int y)
         {
             X = x; Y = y;

@@ -8,3 +8,8 @@ C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\obj\Debug\
 C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\obj\Debug\SnakeLib.pdb
 C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\bin\Debug\SnakeLib.dll
 C:\Users\roman_000\Desktop\RVShershnev\Snake\Snake (SignalR)\SnakeLib\bin\Debug\SnakeLib.pdb
+C:\Users\roman_000\Desktop\RVShershnev\Snake\NewSnake\SnakeLib\bin\Debug\SnakeLib.dll
+C:\Users\roman_000\Desktop\RVShershnev\Snake\NewSnake\SnakeLib\bin\Debug\SnakeLib.pdb
+C:\Users\roman_000\Desktop\RVShershnev\Snake\NewSnake\SnakeLib\obj\Debug\SnakeLib.csprojResolveAssemblyReference.cache
+C:\Users\roman_000\Desktop\RVShershnev\Snake\NewSnake\SnakeLib\obj\Debug\SnakeLib.dll
+C:\Users\roman_000\Desktop\RVShershnev\Snake\NewSnake\SnakeLib\obj\Debug\SnakeLib.pdb

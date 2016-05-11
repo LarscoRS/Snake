@@ -33,9 +33,13 @@
             this.buttonSend = new System.Windows.Forms.Button();
             this.textBoxMes = new System.Windows.Forms.TextBox();
             this.richTextBoxChat = new System.Windows.Forms.RichTextBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pictureBoxMap = new System.Windows.Forms.PictureBox();
             this.buttonSearchGame = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.pictureBoxSnake = new System.Windows.Forms.PictureBox();
+            this.textBoxTime = new System.Windows.Forms.TextBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSnake)).BeginInit();
             this.SuspendLayout();
             // 
             // buttonConnect
@@ -85,15 +89,15 @@
             this.richTextBoxChat.Text = "";
             this.richTextBoxChat.KeyDown += new System.Windows.Forms.KeyEventHandler(this.richTextBoxChat_KeyDown);
             // 
-            // pictureBox1
+            // pictureBoxMap
             // 
-            this.pictureBox1.BackColor = System.Drawing.Color.GreenYellow;
-            this.pictureBox1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.pictureBox1.Location = new System.Drawing.Point(293, 9);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(515, 515);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pictureBoxMap.BackColor = System.Drawing.Color.GreenYellow;
+            this.pictureBoxMap.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.pictureBoxMap.Location = new System.Drawing.Point(293, 9);
+            this.pictureBoxMap.Name = "pictureBoxMap";
+            this.pictureBoxMap.Size = new System.Drawing.Size(515, 515);
+            this.pictureBoxMap.TabIndex = 0;
+            this.pictureBoxMap.TabStop = false;
             // 
             // buttonSearchGame
             // 
@@ -106,13 +110,40 @@
             this.buttonSearchGame.UseVisualStyleBackColor = true;
             this.buttonSearchGame.Click += new System.EventHandler(this.buttonSearchGame_Click);
             // 
+            // richTextBox1
+            // 
+            this.richTextBox1.Enabled = false;
+            this.richTextBox1.Location = new System.Drawing.Point(815, 9);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(550, 515);
+            this.richTextBox1.TabIndex = 8;
+            this.richTextBox1.Text = "";
+            // 
+            // pictureBoxSnake
+            // 
+            this.pictureBoxSnake.Location = new System.Drawing.Point(186, 206);
+            this.pictureBoxSnake.Name = "pictureBoxSnake";
+            this.pictureBoxSnake.Size = new System.Drawing.Size(100, 23);
+            this.pictureBoxSnake.TabIndex = 9;
+            this.pictureBoxSnake.TabStop = false;
+            // 
+            // textBoxTime
+            // 
+            this.textBoxTime.Location = new System.Drawing.Point(186, 235);
+            this.textBoxTime.Name = "textBoxTime";
+            this.textBoxTime.Size = new System.Drawing.Size(100, 20);
+            this.textBoxTime.TabIndex = 10;
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(825, 539);
+            this.ClientSize = new System.Drawing.Size(814, 529);
+            this.Controls.Add(this.textBoxTime);
+            this.Controls.Add(this.pictureBoxSnake);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.buttonSearchGame);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pictureBoxMap);
             this.Controls.Add(this.buttonConnect);
             this.Controls.Add(this.buttonSend);
             this.Controls.Add(this.textBoxName);
@@ -121,7 +152,8 @@
             this.Name = "FormMain";
             this.Text = "Client";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormMain_FormClosed);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxMap)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxSnake)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -134,8 +166,11 @@
         private System.Windows.Forms.Button buttonSend;
         private System.Windows.Forms.TextBox textBoxMes;
         private System.Windows.Forms.RichTextBox richTextBoxChat;
-        public System.Windows.Forms.PictureBox pictureBox1;
+        public System.Windows.Forms.PictureBox pictureBoxMap;
         private System.Windows.Forms.Button buttonSearchGame;
+        private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.PictureBox pictureBoxSnake;
+        private System.Windows.Forms.TextBox textBoxTime;
     }
 }
 

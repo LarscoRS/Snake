@@ -10,7 +10,14 @@ namespace SnakeLib
     {
         public string Name;
         public string ConnectionID;
+        public Snake snake;
 
-       
+        public User(string name, string connectionID)
+        {
+            Name = name;
+            ConnectionID = connectionID;
+        }
+
+        public User() { }
     }
 }

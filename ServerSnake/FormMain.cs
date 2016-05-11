@@ -19,7 +19,12 @@ namespace ServerSnake
         public List<User> Users;
         public int CountPlayer=-1;
         Map map;
-       
+
+        public int CountPlayerSetting;
+        public bool BotsSetting;
+        public int CountBots;
+
+        public long Time { set; get; }
 
         public FormMain()
         {
@@ -37,8 +42,22 @@ namespace ServerSnake
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            buttonStart.Enabled = false;
-            Task.Run(() => StartServer());
+            BotsSetting = checkBoxBots.Checked;
+            CountPlayerSetting = int.Parse(domainUpDownCountPlayer.Text);
+            CountBots = int.Parse(domainUpDownCountBots.Text);
+            if (CountPlayerSetting > 4)
+            {
+                MessageBox.Show("количество игроков не может превышать 4");
+            }
+            if (CountBots > CountPlayerSetting)
+            {
+                MessageBox.Show("количество ботов не может превышать количество игроков");
+            }
+            else
+            {
+                buttonStart.Enabled = false;
+                Task.Run(() => StartServer());
+            }
         }
 
 
@@ -47,6 +66,8 @@ namespace ServerSnake
             StartOptions so = new StartOptions();
             try
             {
+                
+           
                 so.ServerFactory = "Microsoft.Owin.Host.HttpListener";
                 string UrlConnect = "http://localhost:55555/signalr";
                 // so.Urls.Add("http://192.168.1.140:55555/signalr");
@@ -77,7 +98,11 @@ namespace ServerSnake
             richTextBox1.AppendText(Message + Environment.NewLine);
         }
 
-
+        private void checkBoxBots_CheckedChanged(object sender, EventArgs e)
+        {
+            labelCountBots.Visible = true;
+            domainUpDownCountBots.Visible = true;
+        }
     }
 
 
@@ -90,27 +115,27 @@ namespace ServerSnake
             app.MapSignalR();
         }
     }
-    public static class Flag
-    {
-        public static bool flag;
-    }
+    //public static class Flag
+    //{
+    //    public static bool flag;
+    //}
     public class SnakeHub : Hub
     {
 
-        Dispath dispath; //= Dispath.MyInstance;
+        Dispath dispath; 
       
         public void iamStarted()
         {
             dispath = Dispath.MyInstance;
-            dispath.map.createSnake();         
-            dispath.MotorTick += Dispath_MotorTick; 
-            
+            //dispath.Time = Program.FormMain.Time*60*5;
+            dispath.map.createSnake(Program.FormMain.CountPlayerSetting, Program.FormMain.CountBots, Program.FormMain.BotsSetting);                  
+            dispath.MotorTick += Dispath_MotorTick;             
         }
 
         private void Dispath_MotorTick()
-        {            
-            Random R = new Random();            
-            Clients.All.GameTick(dispath.map.Snakes, dispath.map.Food);
+        {                      
+            //Clients.All.GameTick(dispath.map.Snakes, dispath.map.Food, dispath.map.Matrix);
+            Clients.All.GameTick(dispath.map.Snakes, dispath.map.Food, dispath.map.Matrix, dispath.time);
         }
 
         
@@ -160,7 +185,6 @@ namespace ServerSnake
             var userIndex = Program.FormMain.Users.FindIndex(C => C.ConnectionID == Context.ConnectionId);
             dispath = Dispath.MyInstance;
             dispath.pressWay(userIndex, Way);
-            //Clients.All.NewMessage(userIndex +" "+Way.ToString());
         }
 
         public void SendMap(Map map)
@@ -168,18 +192,28 @@ namespace ServerSnake
             Clients.All.NewMap(map);
         }
 
+        public void SendMatrix(Byte[,] Matrix)
+        {
+            Clients.All.NewMatrix(Matrix);
+        }
+
         public void FindGame(string mes)
         {
             Clients.All.NewMessage(mes);
         }
 
+        public void UserSettings(User user)
+        {
+            Clients.Caller.UserSettings(user);
+        }
 
         public void SearchGame()
         {
             var user = Program.FormMain.Users.Find(C => C.ConnectionID == Context.ConnectionId);
             
             Program.FormMain.CountPlayer++;
-            if (Program.FormMain.CountPlayer == 0)
+           
+            if (Program.FormMain.CountPlayer <= Program.FormMain.CountPlayerSetting-1)
             {
                 Clients.All.NewMessage("До начала игры 3");
                 Thread.Sleep(1000);
